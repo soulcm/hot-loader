@@ -10,7 +10,7 @@ module.exports = {
     entry: {
         app: path.join(entryPath, 'app.js'),
         app2: path.join(entryPath, 'app2.js'),
-        vendor: ['react']
+        // vendor: ['react']
     },
     module: {
         loaders: [
@@ -38,21 +38,21 @@ module.exports = {
         }
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'lib/vendor.js'),
+        new webpack.optimize.CommonsChunkPlugin('commons', 'lib/commons.js'),
         new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
             title: 'hot-load',
             template: 'index.html',
             inject: true,
             filename: 'app.html',
-            chunks: ['vendor', 'app']
+            chunks: ['commons', 'app']
         }),
         new HtmlWebpackPlugin({
             title: 'hot-load',
             template: 'index.html',
             inject: true,
             filename: 'app2.html',
-            chunks: ['vendor', 'app2']
+            chunks: ['commons', 'app2']
         }),
     ]
 }
