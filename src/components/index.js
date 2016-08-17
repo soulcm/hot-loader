@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import ReactDom from 'react-dom'
 
+require('css/main')
+
 class Index extends Component {
     constructor(props) {
         super(props)
@@ -8,7 +10,10 @@ class Index extends Component {
 
     render() {
         return (
-            <div>测一下s11 {this.props.data.a}</div>
+            <div>
+                <div>测一下s11 {this.props.data.a}</div>
+                <div className="image">ass</div>
+            </div>
         )
     }
 }
