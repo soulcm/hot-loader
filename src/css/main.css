@@ -1,3 +1,7 @@
+body,html {
+    padding: 0;
+}
+
 .image {
     background: url(../images/pic_not-loaded.png) no-repeat;
     width: 200px;

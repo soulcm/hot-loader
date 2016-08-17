@@ -11,17 +11,22 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['webpack/hot/dev-server','webpack-hot-middleware/client'].concat(baseWebpackConfig.entry[name])
 })
 
-baseWebpackConfig.plugins.push(new webpack.DefinePlugin({
-    'process.env': {
-        NODE_ENV: JSON.stringify('development')
-    }
-}), new ExtractTextPlugin('[name].css'));
+baseWebpackConfig.plugins.push(
+    new webpack.DefinePlugin({
+        'process.env': {
+            NODE_ENV: JSON.stringify('development')
+        }
+    }),
+    new ExtractTextPlugin('[name].css'),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+);
 
 module.exports = merge(baseWebpackConfig, {
     devtool: 'source-map',
     output: {
         path: path.join(__dirname),
-        filename: 'bundle.js',
+        filename: '[name].js',
         publicPath: '/'
     }
 })

@@ -8,7 +8,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
-        app: path.join(entryPath, 'app.js')
+        app: path.join(entryPath, 'app.js'),
+        app2: path.join(entryPath, 'app2.js'),
+        vendor: ['react']
     },
     module: {
         loaders: [
@@ -36,13 +38,21 @@ module.exports = {
         }
     },
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'lib/vendor.js'),
         new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
             title: 'hot-load',
             template: 'index.html',
-            inject: true
-        })
+            inject: true,
+            filename: 'app.html',
+            chunks: ['vendor', 'app']
+        }),
+        new HtmlWebpackPlugin({
+            title: 'hot-load',
+            template: 'index.html',
+            inject: true,
+            filename: 'app2.html',
+            chunks: ['vendor', 'app2']
+        }),
     ]
 }
